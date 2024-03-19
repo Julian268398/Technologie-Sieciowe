@@ -1,29 +1,40 @@
 package com.example.lista2ts.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Book {
+@Table(name = "books", schema = "library_w11")
+public class BookEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bookId")
+    private long id;
 
+    @Basic
+    @Column(name = "isbn", unique = true)
     private String isbn;
 
+    @Basic
+    @Column(name = "titile")
     private String title;
 
+    @Basic
+    @Column(name = "author")
     private String author;
 
+    @Basic
+    @Column(name = "publisher")
     private String publisher;
 
+    @Basic
+    @Column(name = "yearOfPublish")
     private Integer yearOfPublish;
 
+    @Basic
+    @Column(name = "availableCopies")
     private Integer availableCopies;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
