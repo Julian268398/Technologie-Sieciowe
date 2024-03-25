@@ -22,9 +22,9 @@ public class UserController {
         return userService.getAll();
     }
 
-    @GetMapping("/get/{id}")
-    public UserEntity getOne(@PathVariable int bookId) {
-        return userService.getOne(bookId);
+    @GetMapping("/get/{userId}")
+    public UserEntity getOne(@PathVariable int userId) {
+        return userService.getOne(userId);
     }
 
     @PostMapping("/create")
@@ -33,7 +33,7 @@ public class UserController {
         return userService.create(user);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{userId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int userId) {
         userService.delete(userId);
