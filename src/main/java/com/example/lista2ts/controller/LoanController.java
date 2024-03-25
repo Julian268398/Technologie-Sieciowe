@@ -21,7 +21,7 @@ public class LoanController {
         return loanService.getAll();
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get/{loanId}")
     public LoanEntity getOne(@PathVariable int loanId) {
         return loanService.getOne(loanId);
     }
@@ -32,7 +32,7 @@ public class LoanController {
         return loanService.create(book);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{loanId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int loanId) {
         loanService.delete(loanId);
