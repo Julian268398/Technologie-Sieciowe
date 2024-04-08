@@ -1,5 +1,8 @@
 package com.example.lista2ts.controller;
 
+import com.example.lista2ts.dto.BookCreateDTO;
+import com.example.lista2ts.dto.BookCreateResponseDTO;
+import com.example.lista2ts.dto.BookDTO;
 import com.example.lista2ts.entity.BookEntity;
 import com.example.lista2ts.entity.BookEntity;
 import com.example.lista2ts.repository.BookRepository;
@@ -19,22 +22,23 @@ public class BookController {
     }
 
     @GetMapping("/getAll")
-    public @ResponseBody Iterable<BookEntity> getAll() {
+    public @ResponseBody Iterable<BookDTO> getAll() {
+
         return bookService.getAll();
     }
 
-    @GetMapping("/get/{id}")
-    public BookEntity getOne(@PathVariable int bookId) {
+    @GetMapping("/get/{bookId}")
+    public BookDTO getOne(@PathVariable int bookId) {
         return bookService.getOne(bookId);
     }
 
     @PostMapping("/create")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody BookEntity create(@RequestBody BookEntity book) {
+    public @ResponseBody BookCreateResponseDTO create(@RequestBody BookCreateDTO book) {
         return bookService.create(book);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{bookId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int bookId) {
         bookService.delete(bookId);

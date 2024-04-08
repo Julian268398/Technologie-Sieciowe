@@ -1,5 +1,8 @@
 package com.example.lista2ts.controller;
 
+import com.example.lista2ts.dto.LoanCreateDTO;
+import com.example.lista2ts.dto.LoanCreateResponseDTO;
+import com.example.lista2ts.dto.LoanDTO;
 import com.example.lista2ts.entity.LoanEntity;
 import com.example.lista2ts.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +20,23 @@ public class LoanController {
     }
 
     @GetMapping("/getAll")
-    public @ResponseBody Iterable<LoanEntity> getAll() {
+    public @ResponseBody Iterable<LoanDTO> getAll() {
+
         return loanService.getAll();
     }
 
-    @GetMapping("/get/{id}")
-    public LoanEntity getOne(@PathVariable int loanId) {
+    @GetMapping("/get/{loanId}")
+    public LoanDTO getOne(@PathVariable int loanId) {
         return loanService.getOne(loanId);
     }
 
     @PostMapping("/create")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody LoanEntity create(@RequestBody LoanEntity book) {
-        return loanService.create(book);
+    public @ResponseBody LoanCreateResponseDTO create(@RequestBody LoanCreateDTO loan) {
+        return loanService.create(loan);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{loanId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int loanId) {
         loanService.delete(loanId);

@@ -1,44 +1,39 @@
-package com.example.lista2ts.entity;
+package com.example.lista2ts.dto;
 
-import jakarta.persistence.*;
+public class BookDTO {
 
-@Entity
-@Table(name = "books", schema = "library_w11")
-public class BookEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bookId")
     private long id;
 
-    @Basic
-    @Column(name = "isbn", unique = true)
     private String isbn;
 
-    @Basic
-    @Column(name = "title")
     private String title;
 
-    @Basic
-    @Column(name = "author")
     private String author;
 
-    @Basic
-    @Column(name = "publisher")
     private String publisher;
 
-    @Basic
-    @Column(name = "yearOfPublish")
     private Integer yearOfPublish;
 
-    @Basic
-    @Column(name = "availableCopies")
     private Integer availableCopies;
+
+    public BookDTO(long id, String isbn, String title, String author, String publisher, Integer yearOfPublish, Integer availableCopies) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.yearOfPublish = yearOfPublish;
+        this.availableCopies = availableCopies;
+    }
+
+    public BookDTO() {
+    }
 
     public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -90,4 +85,3 @@ public class BookEntity {
         this.availableCopies = availableCopies;
     }
 }
-
