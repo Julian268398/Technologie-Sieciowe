@@ -1,6 +1,7 @@
 package com.example.lista2ts.controller;
 
 import com.example.lista2ts.dto.LoginDTO;
+import com.example.lista2ts.dto.LoginResponseDTO;
 import com.example.lista2ts.dto.RegisterDTO;
 import com.example.lista2ts.dto.RegisterResponseDTO;
 import com.example.lista2ts.service.AuthService;
@@ -27,7 +28,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void register (@RequestBody LoginDTO requestBody) {
-        authService.login(requestBody);
+    public ResponseEntity<LoginResponseDTO> register (@RequestBody LoginDTO requestBody) {
+        LoginResponseDTO dto = authService.login(requestBody);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 }

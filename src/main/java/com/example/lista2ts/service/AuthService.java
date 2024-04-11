@@ -1,6 +1,8 @@
 package com.example.lista2ts.service;
 
+import com.example.lista2ts.commonTypes.UserRole;
 import com.example.lista2ts.dto.LoginDTO;
+import com.example.lista2ts.dto.LoginResponseDTO;
 import com.example.lista2ts.dto.RegisterDTO;
 import com.example.lista2ts.dto.RegisterResponseDTO;
 import com.example.lista2ts.entity.AuthEntity;
@@ -17,10 +19,13 @@ public class AuthService {
 
     private final UserRepository userRepository;
 
+    private final JwtService jwtService;
+
     @Autowired
-    public AuthService(AuthRepository authRepository, UserRepository userRepository) {
+    public AuthService(AuthRepository authRepository, UserRepository userRepository, JwtService jwtService) {
         this.authRepository = authRepository;
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
 
     public RegisterResponseDTO register(RegisterDTO dto){
@@ -39,11 +44,15 @@ public class AuthService {
         return new RegisterResponseDTO(createdAuth.getUsername(), createdAuth.getRole());
     }
 
-    public void login(LoginDTO dto) {
+    public LoginResponseDTO login(LoginDTO dto) {
         AuthEntity authEntity = authRepository.findByUsername(dto.getUsername()).orElseThrow(RuntimeException::new);
 
         if (!authEntity.getPassword().equals(dto.getPassword())){
             throw new RuntimeException();
         }
+
+        String token = jwtService.generateToken(authEntity);
+
+        return new LoginResponseDTO(token);
     }
 }
