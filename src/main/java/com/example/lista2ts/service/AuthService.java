@@ -1,5 +1,6 @@
 package com.example.lista2ts.service;
 
+import com.example.lista2ts.dto.LoginDTO;
 import com.example.lista2ts.dto.RegisterDTO;
 import com.example.lista2ts.dto.RegisterResponseDTO;
 import com.example.lista2ts.entity.AuthEntity;
@@ -36,5 +37,13 @@ public class AuthService {
         AuthEntity createdAuth = authRepository.save(authEntity);
 
         return new RegisterResponseDTO(createdAuth.getUsername(), createdAuth.getRole());
+    }
+
+    public void login(LoginDTO dto) {
+        AuthEntity authEntity = authRepository.findByUsername(dto.getUsername()).orElseThrow(RuntimeException::new);
+
+        if (!authEntity.getPassword().equals(dto.getPassword())){
+            throw new RuntimeException();
+        }
     }
 }
