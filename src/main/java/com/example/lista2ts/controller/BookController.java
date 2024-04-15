@@ -9,6 +9,7 @@ import com.example.lista2ts.repository.BookRepository;
 import com.example.lista2ts.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,12 +34,14 @@ public class BookController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody BookCreateResponseDTO create(@RequestBody BookCreateDTO book) {
         return bookService.create(book);
     }
 
     @DeleteMapping("/delete/{bookId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int bookId) {
         bookService.delete(bookId);
