@@ -10,6 +10,9 @@ import com.example.lista2ts.entity.UserEntity;
 import com.example.lista2ts.repository.AuthRepository;
 import com.example.lista2ts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,11 +24,17 @@ public class AuthService {
 
     private final JwtService jwtService;
 
+    private final PasswordEncoder passwordEncoder;
+
+    private final AuthenticationManager authenticationManager;
+
     @Autowired
-    public AuthService(AuthRepository authRepository, UserRepository userRepository, JwtService jwtService) {
+    public AuthService(AuthRepository authRepository, UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this.authRepository = authRepository;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
     public RegisterResponseDTO register(RegisterDTO dto){
@@ -34,7 +43,7 @@ public class AuthService {
         userRepository.save(userEntity);
 
         AuthEntity authEntity = new AuthEntity();
-        authEntity.setPassword(dto.getPassword());
+        authEntity.setPassword(passwordEncoder.encode(dto.getPassword()));
         authEntity.setUsername(dto.getUsername());
         authEntity.setRole(dto.getRole());
         authEntity.setUser(userEntity);
@@ -47,7 +56,7 @@ public class AuthService {
     public LoginResponseDTO login(LoginDTO dto) {
         AuthEntity authEntity = authRepository.findByUsername(dto.getUsername()).orElseThrow(RuntimeException::new);
 
-        if (!authEntity.getPassword().equals(dto.getPassword())){
+        if (!passwordEncoder.matches(dto.getPassword(), authEntity.getPassword())){
             throw new RuntimeException();
         }
 

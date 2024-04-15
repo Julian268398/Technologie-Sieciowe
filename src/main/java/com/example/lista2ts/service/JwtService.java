@@ -2,7 +2,6 @@ package com.example.lista2ts.service;
 
 import com.example.lista2ts.commonTypes.UserRole;
 import com.example.lista2ts.entity.AuthEntity;
-import io.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
