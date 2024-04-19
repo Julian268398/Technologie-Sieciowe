@@ -1,6 +1,8 @@
 package com.example.lista2ts.dto;
 
 
+import jakarta.validation.constraints.NotNull;
+
 public class UserCreateDTO {
 
 

@@ -7,6 +7,7 @@ import com.example.lista2ts.dto.RegisterDTO;
 import com.example.lista2ts.dto.RegisterResponseDTO;
 import com.example.lista2ts.entity.AuthEntity;
 import com.example.lista2ts.entity.UserEntity;
+import com.example.lista2ts.errors.MailAlreadyUsedException;
 import com.example.lista2ts.errors.UserAlreadyExistsException;
 import com.example.lista2ts.repository.AuthRepository;
 import com.example.lista2ts.repository.UserRepository;
@@ -48,8 +49,15 @@ public class AuthService {
             throw UserAlreadyExistsException.create(dto.getUsername());
         }
 
+        Optional<UserEntity> existingMail = userRepository.findByMail(dto.getMail());
+
+        if (existingMail.isPresent()) {
+            throw MailAlreadyUsedException.create(dto.getMail());
+        }
+
         UserEntity userEntity = new UserEntity();
         userEntity.setMail(dto.getMail());
+        userEntity.setName(dto.getName());
         userRepository.save(userEntity);
 
         AuthEntity authEntity = new AuthEntity();

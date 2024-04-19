@@ -1,5 +1,7 @@
 package com.example.lista2ts.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UserCreateResponseDTO {
     private long id;
 

@@ -11,11 +11,14 @@ public class RegisterDTO {
 
     private String mail;
 
-    public RegisterDTO(String password, String username, UserRole role, String mail) {
+    private String name;
+
+    public RegisterDTO(String password, String username, UserRole role, String mail, String name) {
         this.password = password;
         this.username = username;
         this.role = role;
         this.mail = mail;
+        this.name = name;
     }
 
     public String getPassword() {
@@ -48,5 +51,13 @@ public class RegisterDTO {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

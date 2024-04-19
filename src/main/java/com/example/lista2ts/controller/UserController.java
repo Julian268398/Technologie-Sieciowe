@@ -34,11 +34,6 @@ public class UserController {
         return userService.getOne(userId);
     }
 
-    @PostMapping("/create")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody UserCreateResponseDTO create(@RequestBody UserCreateDTO user) {
-        return userService.create(user);
-    }
 
     @DeleteMapping("/delete/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
