@@ -6,6 +6,7 @@ import com.example.lista2ts.dto.UserDTO;
 import com.example.lista2ts.entity.BookEntity;
 import com.example.lista2ts.entity.UserEntity;
 import com.example.lista2ts.errors.BookAlreadyExistsException;
+import com.example.lista2ts.errors.MailAlreadyUsedException;
 import com.example.lista2ts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class UserService {
         Optional<UserEntity> existingMail = userRepository.findByMail(user.getMail());
 
         if (existingMail.isPresent()) {
-            throw BookAlreadyExistsException.create(user.getMail());
+            throw MailAlreadyUsedException.create(user.getMail());
         }
 
         var userEntity = new UserEntity();
