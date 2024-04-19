@@ -3,12 +3,15 @@ package com.example.lista2ts.service;
 import com.example.lista2ts.dto.UserCreateDTO;
 import com.example.lista2ts.dto.UserCreateResponseDTO;
 import com.example.lista2ts.dto.UserDTO;
+import com.example.lista2ts.entity.BookEntity;
 import com.example.lista2ts.entity.UserEntity;
+import com.example.lista2ts.errors.BookAlreadyExistsException;
 import com.example.lista2ts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +33,13 @@ public class UserService {
     }
 
     public UserCreateResponseDTO create(UserCreateDTO user) {
+
+        Optional<UserEntity> existingMail = userRepository.findByMail(user.getMail());
+
+        if (existingMail.isPresent()) {
+            throw BookAlreadyExistsException.create(user.getMail());
+        }
+
         var userEntity = new UserEntity();
 
         userEntity.setMail(user.getMail());

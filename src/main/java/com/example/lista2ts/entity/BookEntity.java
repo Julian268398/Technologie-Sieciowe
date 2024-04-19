@@ -14,27 +14,27 @@ public class BookEntity {
     private long id;
 
     @Basic
-    @Column(name = "isbn", unique = true)
+    @Column(name = "isbn", unique = true, nullable = false)
     private String isbn;
 
     @Basic
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Basic
-    @Column(name = "author")
+    @Column(name = "author", nullable = false)
     private String author;
 
     @Basic
-    @Column(name = "publisher")
+    @Column(name = "publisher", nullable = false)
     private String publisher;
 
     @Basic
-    @Column(name = "yearOfPublish")
+    @Column(name = "yearOfPublish", nullable = false)
     private Integer yearOfPublish;
 
     @Basic
-    @Column(name = "availableCopies")
+    @Column(name = "availableCopies", nullable = false)
     private Integer availableCopies;
 
     @JsonIgnore

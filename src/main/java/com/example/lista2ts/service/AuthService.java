@@ -7,6 +7,7 @@ import com.example.lista2ts.dto.RegisterDTO;
 import com.example.lista2ts.dto.RegisterResponseDTO;
 import com.example.lista2ts.entity.AuthEntity;
 import com.example.lista2ts.entity.UserEntity;
+import com.example.lista2ts.errors.UserAlreadyExistsException;
 import com.example.lista2ts.repository.AuthRepository;
 import com.example.lista2ts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -38,6 +41,13 @@ public class AuthService {
     }
 
     public RegisterResponseDTO register(RegisterDTO dto){
+
+        Optional<AuthEntity> existingAuth = authRepository.findByUsername(dto.getUsername());
+
+        if (existingAuth.isPresent()) {
+            throw UserAlreadyExistsException.create(dto.getUsername());
+        }
+
         UserEntity userEntity = new UserEntity();
         userEntity.setMail(dto.getMail());
         userRepository.save(userEntity);

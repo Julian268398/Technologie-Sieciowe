@@ -23,7 +23,7 @@ public class LoanEntity {
     private String dateOfLoan;
 
     @Basic
-    @Column(name = "deadlineOfLoan")
+    @Column(name = "deadlineOfLoan", nullable = false)
     private String deadlineOfLoan;
 
     @Basic

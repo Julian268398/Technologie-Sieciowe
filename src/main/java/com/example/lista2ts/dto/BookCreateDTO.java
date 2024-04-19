@@ -1,17 +1,25 @@
 package com.example.lista2ts.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class BookCreateDTO {
 
+    @NotNull
     private String isbn;
 
+    @NotNull
     private String title;
 
+    @NotNull
     private String author;
 
+    @NotNull
     private String publisher;
 
+    @NotNull
     private Integer yearOfPublish;
 
+    @NotNull
     private Integer availableCopies;
 
     public BookCreateDTO(String isbn, String title, String author, String publisher, Integer yearOfPublish, Integer availableCopies) {

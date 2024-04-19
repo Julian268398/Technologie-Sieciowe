@@ -14,14 +14,15 @@ public class UserEntity {
     private long id;
 
     @Basic
-    @Column(name = "mail")
+    @Column(name = "mail", unique = true, nullable = false)
     private String mail;
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn(name = "authId", nullable = false)
     private AuthEntity auth;
 
     @JsonIgnore
