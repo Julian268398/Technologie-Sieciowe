@@ -1,14 +1,20 @@
 package com.example.lista2ts.dto;
 
 import com.example.lista2ts.commonTypes.UserRole;
+import jakarta.validation.constraints.NotBlank;
 
 public class RegisterDTO {
+
+    @NotBlank(message = "Password is required")
     private String password;
 
+    @NotBlank(message = "Username is required")
     private String username;
 
+    @NotBlank(message = "Role is required")
     private UserRole role;
 
+    @NotBlank(message = "Mail is required")
     private String mail;
 
     private String name;
