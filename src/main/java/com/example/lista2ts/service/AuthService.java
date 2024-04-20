@@ -82,4 +82,11 @@ public class AuthService {
 
         return new LoginResponseDTO(token);
     }
+
+    public void delete(long userId){
+        if (!authRepository.existsById(userId)){
+            throw new RuntimeException();
+        }
+        authRepository.deleteById(userId);
+    }
 }

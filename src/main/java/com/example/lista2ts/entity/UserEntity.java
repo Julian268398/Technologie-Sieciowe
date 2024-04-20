@@ -21,9 +21,6 @@ public class UserEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @JoinColumn(name = "authId", nullable = false)
-    private AuthEntity auth;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -52,14 +49,6 @@ public class UserEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public AuthEntity getAuth() {
-        return auth;
-    }
-
-    public void setAuth(AuthEntity auth) {
-        this.auth = auth;
     }
 
     public List<LoanEntity> getLoans() {

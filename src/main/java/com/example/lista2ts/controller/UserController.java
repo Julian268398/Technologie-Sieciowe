@@ -5,6 +5,7 @@ import com.example.lista2ts.dto.UserCreateResponseDTO;
 import com.example.lista2ts.dto.UserDTO;
 import com.example.lista2ts.entity.BookEntity;
 import com.example.lista2ts.entity.UserEntity;
+import com.example.lista2ts.service.AuthService;
 import com.example.lista2ts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final AuthService authService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
     @GetMapping("/getAll")
@@ -39,6 +42,7 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int userId) {
+        authService.delete(userId);
         userService.delete(userId);
     }
 }
