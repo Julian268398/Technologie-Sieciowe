@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/loan")
+@CrossOrigin
 public class LoanController {
     private final LoanService loanService;
 
