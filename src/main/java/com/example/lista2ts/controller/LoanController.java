@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/loan")
-@CrossOrigin
 public class LoanController {
     private final LoanService loanService;
 
@@ -22,7 +21,7 @@ public class LoanController {
     }
 
     @GetMapping("/getAll")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     public @ResponseBody Iterable<LoanDTO> getAll() {
 
         return loanService.getAll();

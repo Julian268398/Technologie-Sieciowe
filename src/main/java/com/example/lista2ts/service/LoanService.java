@@ -23,12 +23,12 @@ public class LoanService {
     public List<LoanDTO> getAll() {
         var loans = loanRepository.findAll();
 
-        return loans.stream().map((loan) -> new LoanDTO(loan.getId(), loan.getBook(), loan.getUser(), loan.getDateOfLoan(), loan.getDeadlineOfLoan(), loan.getDateOfReturn())).collect(Collectors.toList());
+        return loans.stream().map((loan) -> new LoanDTO(loan.getId(), loan.getBook().getId(), loan.getUser().getId(), loan.getDateOfLoan(), loan.getDeadlineOfLoan(), loan.getDateOfReturn())).collect(Collectors.toList());
     }
 
     public LoanDTO getOne(long loanId) {
         var loan = loanRepository.findById(loanId).orElseThrow(() -> new RuntimeException("Loan record not found!"));
-        return new LoanDTO(loan.getId(), loan.getBook(), loan.getUser(), loan.getDateOfLoan(), loan.getDeadlineOfLoan(), loan.getDateOfReturn());
+        return new LoanDTO(loan.getId(), loan.getBook().getId(), loan.getUser().getId(), loan.getDateOfLoan(), loan.getDeadlineOfLoan(), loan.getDateOfReturn());
     }
 
     public LoanCreateResponseDTO create(LoanCreateDTO loan) {

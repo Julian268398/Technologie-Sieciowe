@@ -6,9 +6,9 @@ public class LoanDTO {
 
     private long id;
 
-    private BookEntity book;
+    private long book;
 
-    private UserEntity user;
+    private long user;
 
     private String dateOfLoan;
 
@@ -19,7 +19,7 @@ public class LoanDTO {
     public LoanDTO() {
     }
 
-    public LoanDTO(long id, BookEntity book, UserEntity user, String dateOfLoan, String deadlineOfLoan, String dateOfReturn) {
+    public LoanDTO(long id, long book, long user, String dateOfLoan, String deadlineOfLoan, String dateOfReturn) {
         this.id = id;
         this.book = book;
         this.user = user;
@@ -36,19 +36,19 @@ public class LoanDTO {
         this.id = id;
     }
 
-    public BookEntity getBook() {
+    public long getBook() {
         return book;
     }
 
-    public void setBook(BookEntity book) {
+    public void setBook(long book) {
         this.book = book;
     }
 
-    public UserEntity getUser() {
+    public long getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(long user) {
         this.user = user;
     }
 
