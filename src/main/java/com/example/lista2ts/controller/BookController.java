@@ -20,16 +20,19 @@ public class BookController {
     }
 
     @GetMapping("/getAll")
+    @PreAuthorize("permitAll()")
     public @ResponseBody Iterable<BookDTO> getAll() {
         return bookService.getAll();
     }
 
     @GetMapping("/get/{bookId}")
+    @PreAuthorize("permitAll()")
     public BookDTO getOne(@PathVariable int bookId) {
         return bookService.getOne(bookId);
     }
 
     @PostMapping("/create")
+    @PreAuthorize("permitAll()")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody BookCreateResponseDTO create(@RequestBody BookCreateDTO book) {
         return bookService.create(book);

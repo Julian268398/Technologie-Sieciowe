@@ -1,44 +1,37 @@
 package com.example.lista2ts.dto;
 
-import com.example.lista2ts.entity.BookEntity;
-import com.example.lista2ts.entity.UserEntity;
-
 public class LoanCreateDTO {
-    private BookEntity book;
-
-    private UserEntity user;
-
+    private long bookId;
+    private long userId;
     private String dateOfLoan;
-
     private String deadlineOfLoan;
-
     private String dateOfReturn;
 
     public LoanCreateDTO() {
     }
 
-    public LoanCreateDTO(BookEntity book, UserEntity user, String dateOfLoan, String deadlineOfLoan, String dateOfReturn) {
-        this.book = book;
-        this.user = user;
+    public LoanCreateDTO(long bookId, long userId, String dateOfLoan, String deadlineOfLoan, String dateOfReturn) {
+        this.bookId = bookId;
+        this.userId = userId;
         this.dateOfLoan = dateOfLoan;
         this.deadlineOfLoan = deadlineOfLoan;
         this.dateOfReturn = dateOfReturn;
     }
 
-    public BookEntity getBook() {
-        return book;
+    public long getBookId() {
+        return bookId;
     }
 
-    public void setBook(BookEntity book) {
-        this.book = book;
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getDateOfLoan() {
