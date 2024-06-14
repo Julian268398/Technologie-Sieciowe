@@ -25,14 +25,14 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('ADMIN')")
     public @ResponseBody Iterable<UserDTO> getAll() {
 
         return userService.getAll();
     }
 
     @GetMapping("/get/{userId}")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('ADMIN')")
     public UserDTO getOne(@PathVariable int userId) {
         return userService.getOne(userId);
     }

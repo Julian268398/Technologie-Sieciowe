@@ -32,7 +32,7 @@ public class BookController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody BookCreateResponseDTO create(@RequestBody BookCreateDTO book) {
         return bookService.create(book);

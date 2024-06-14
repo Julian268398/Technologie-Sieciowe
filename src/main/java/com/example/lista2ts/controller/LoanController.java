@@ -34,7 +34,7 @@ public class LoanController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(code = HttpStatus.CREATED)
     public @ResponseBody LoanCreateResponseDTO create(@RequestBody LoanCreateDTO loan) {
         return loanService.create(loan);
